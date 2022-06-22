@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row, Input, Button, Select, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 import { todoListFilter } from "../../redux/selectors";
-import { addTodo, toggleTodoStatus } from "./todoListReducer";
+import {
+  addTodoThunk,
+  getTodosThunk,
+  toggleStatusTodoThunk,
+} from "./todoListReducer";
 
 import Todo from "../Todo";
 
@@ -16,9 +20,15 @@ export default function TodoList() {
   const [todoName, setTodoName] = useState("");
   const [priority, setPriority] = useState("Medium");
 
+  console.log("todoListt", todoList);
+
+  useEffect(() => {
+    dispatch(getTodosThunk());
+  }, []);
+
   const hanldeAddTodo = () => {
     dispatch(
-      addTodo({
+      addTodoThunk({
         id: uuidv4(),
         name: todoName,
         priority: priority,
@@ -38,7 +48,7 @@ export default function TodoList() {
   };
 
   const handleCheckStatus = (id) => {
-    dispatch(toggleTodoStatus(id));
+    dispatch(toggleStatusTodoThunk(id));
   };
 
   const renderTodoList = (list) => {

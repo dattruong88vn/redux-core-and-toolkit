@@ -12,15 +12,14 @@ export const setupServer = () => {
 
       this.post("/api/todo", (schema, request) => {
         const payload = JSON.parse(request.requestBody);
-
         return schema.todos.create(payload);
       });
 
       this.patch("/api/todo", (schema, request) => {
         const payload = JSON.parse(request.requestBody);
         const selectedTodo = schema.todos.find(payload.id);
-        selectedTodo.update(payload);
-        return schema.todos;
+        selectedTodo.update({ completed: !selectedTodo.completed });
+        return selectedTodo;
       });
     },
   });

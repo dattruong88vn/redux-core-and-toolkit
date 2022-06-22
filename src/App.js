@@ -3,47 +3,14 @@ import "./App.css";
 import TodoList from "./components/TodoList";
 import Filters from "./components/Filters";
 import { setupServer } from "./fakeApi";
-import { useEffect } from "react";
 
-setupServer();
+if (process.env.NODE_ENV === "development") {
+  setupServer();
+}
 
 const { Title } = Typography;
 
 function App() {
-  useEffect(() => {
-    (async () => {
-      try {
-        await fetch("/api/todo", {
-          method: "POST",
-          body: JSON.stringify({
-            id: 1,
-            name: "Learn Redux",
-            completed: true,
-            priority: "High",
-          }),
-        });
-
-        const response1 = await fetch("/api/todos");
-        const data1 = await response1.json();
-        console.log(data1);
-
-        await fetch("/api/todo", {
-          method: "PATCH",
-          body: JSON.stringify({
-            id: 1,
-            name: "Learn Redux-Toolkit",
-            completed: true,
-            priority: "High",
-          }),
-        });
-
-        const response2 = await fetch("/api/todos");
-        const data2 = await response2.json();
-        console.log(data2);
-      } catch (err) {}
-    })();
-  }, []);
-
   return (
     <div
       style={{
