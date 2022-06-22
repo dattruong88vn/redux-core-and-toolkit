@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Input, Typography, Radio, Select, Tag } from "antd";
+import { prioritiesSelector } from "../../redux/selectors";
 import {
   searchFilterChange,
   statusFilterChange,
   priorityFilterChange,
-} from "../../redux/actions";
-import { prioritiesSelector } from "../../redux/selectors";
+} from "./filterReducer";
 
 const { Search } = Input;
 

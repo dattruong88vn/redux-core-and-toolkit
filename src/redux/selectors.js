@@ -1,15 +1,5 @@
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
-// use custom selector
-// export const todoListSelector = (state) => {
-//   return state.todoList.filter((todo) => {
-//     return todo.name.toLowerCase().includes(searchTextSelector(state)) && todo.s;
-//   });
-// };
-
-// export const searchTextSelector = (state) => state.filters.search;
-
-// use reselect lib
 export const todoListSelector = (state) => state.todoList;
 export const searchTextSelector = (state) => state.filters.search;
 export const statusFilterSelector = (state) => state.filters.status;

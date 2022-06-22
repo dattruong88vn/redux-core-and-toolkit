@@ -3,17 +3,14 @@ import { Col, Row, Input, Button, Select, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { addTodo, toggleTodoStatus } from "../../redux/actions";
-import { todoListSelector, todoListFilter } from "../../redux/selectors";
+import { todoListFilter } from "../../redux/selectors";
+import { addTodo, toggleTodoStatus } from "./todoListReducer";
 
 import Todo from "../Todo";
 
 export default function TodoList() {
   const dispatch = useDispatch();
 
-  // use custom selector
-  // const todoList = useSelector(todoListSelector);
-  // use reselect lib
   const todoList = useSelector(todoListFilter);
 
   const [todoName, setTodoName] = useState("");

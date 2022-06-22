@@ -1,33 +1,26 @@
-const initState = {
-  search: "",
-  status: "All",
-  priority: [],
-};
+import { createSlice } from "@reduxjs/toolkit";
 
-const filterReducer = (state = initState, action) => {
-  switch (action.type) {
-    case "filters/searchFilterChange":
-      return {
-        ...state,
-        search: action.payload,
-      };
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState: {
+    search: "",
+    status: "All",
+    priority: [],
+  },
+  reducers: {
+    // mutation --> immutatin with Immer
+    searchFilterChange: (state, action) => {
+      state.search = action.payload;
+    },
+    statusFilterChange: (state, action) => {
+      state.status = action.payload;
+    },
+    priorityFilterChange: (state, action) => {
+      state.priority = action.payload;
+    },
+  },
+});
 
-    case "filters/statusFilterChange":
-      return {
-        ...state,
-        status: action.payload,
-      };
-
-    case "filters/priorityFilterChange":
-      console.log(action.payload);
-      return {
-        ...state,
-        priority: action.payload,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export default filterReducer;
+export const { searchFilterChange, statusFilterChange, priorityFilterChange } =
+  filtersSlice.actions;
+export default filtersSlice.reducer;
